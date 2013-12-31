@@ -1,0 +1,55 @@
+﻿<form class="form-search">
+    <div class="input-append">
+        <input type="text" ng-model="query" class="input-medium search-query" placeholder="Search">
+        <button ng-click="reset()" type="submit" class="btn"><i class="icon-search"></i></button>
+    </div>
+    <button ng-click="query=''; reset()" ng-disabled="!query" type="submit" class="btn">Reset</button>
+</form>
+
+
+<table class="table table-stripped table-condensed table-hover">
+    <thead>
+        <th>ID</th>
+        <th><a ng-click="sort_by('FName')">First Name</a>
+            <span ng-show="sort_order=='FName' && is_desc==true"><i class="icon-arrow-down"></i></span>
+            <span ng-show="sort_order=='FName' && is_desc==false"><i class="icon-arrow-up"></i></span>
+            <span ng-show="do_show(true, 'FName')"><i class="icon-circle-arrow-down"></i></span>
+            <span ng-show="do_show(false, 'FName')"><i class="icon-circle-arrow-up"></i></span>
+        </th>
+        <th><a ng-click="sort_by('LName')">Last Name</a>
+            <span ng-show="sort_order=='LName' && is_desc==true"><i class="icon-arrow-down"></i></span>
+            <span ng-show="sort_order=='LName' && is_desc==false"><i class="icon-arrow-up"></i></span>
+            <span ng-show="do_show(true, 'LName')"><i class="icon-circle-arrow-down"></i></span>
+            <span ng-show="do_show(false, 'LName')"><i class="icon-circle-arrow-up"></i></span>
+        </th>
+        <th><a ng-click="sort_by('DOB')">Date Of Birth</a>
+            <span ng-show="sort_order=='DOB' && is_desc==true"><i class="icon-arrow-down"></i></span>
+            <span ng-show="sort_order=='DOB' && is_desc==false"><i class="icon-arrow-up"></i></span>
+            <span ng-show="do_show(true, 'DOB')"><i class="icon-circle-arrow-down"></i></span>
+            <span ng-show="do_show(false, 'DOB')"><i class="icon-circle-arrow-up"></i></span>
+        </th>
+        <th><a ng-click="sort_by('Dept')">Department</a>
+            <span ng-show="sort_order=='Dept' && is_desc==true"><i class="icon-arrow-down"></i></span>
+            <span ng-show="sort_order=='Dept' && is_desc==false"><i class="icon-arrow-up"></i></span>
+            <span ng-show="do_show(true, 'Dept')"><i class="icon-circle-arrow-down"></i></span>
+            <span ng-show="do_show(false, 'Dept')"><i class="icon-circle-arrow-up"></i></span>
+        </th>
+        <th><a href="#/new"><i class="icon-plus"></i><strong> + </strong></a></th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="employee in employees" id="emp_{{employee.Id}}">
+            <td>{{employee.Id}}</td>
+            <td>{{employee.FName}}</td>
+            <td>{{employee.LName}}</td>
+            <td>{{employee.DOB | date:mdeiumDate}}</td>
+            <td>{{employee.Dept}}</td>
+            <td>
+                <a href="#/edit/{{employee.Id}}"><i class="icon-edit"></i><strong>~</strong></a>
+                <a ng-click="delete()"><i class="icon-remove"></i><strong>X</strong></a>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+<a href="" ng-click = "offset = offset + limit; search()" 
+    ng-show ="show_more()">Show more</a>
